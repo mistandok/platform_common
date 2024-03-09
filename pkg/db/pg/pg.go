@@ -5,8 +5,9 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/mistandok/platform_common/pkg/v1/db"
-	"github.com/mistandok/platform_common/pkg/v1/db/prettier"
+	"github.com/mistandok/platform_common/pkg/db"
+	"github.com/mistandok/platform_common/pkg/db/prettier"
+
 	"github.com/rs/zerolog"
 )
 

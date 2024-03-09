@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	db "github.com/mistandok/platform_common/pkg/v1/db"
+	db "github.com/mistandok/platform_common/pkg/db"
 	mock "github.com/stretchr/testify/mock"
 )
 

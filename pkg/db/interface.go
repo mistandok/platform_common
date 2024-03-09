@@ -7,7 +7,7 @@ import (
 	"github.com/jackc/pgx/v5/pgconn"
 )
 
-//go:generate ../../../bin/mockery --output ./mocks  --inpackage-suffix --all
+//go:generate ../../bin/mockery --output ./mocks  --inpackage-suffix --all
 
 // Handler - функция, которая выполняется в транзакции
 type Handler func(ctx context.Context) error
