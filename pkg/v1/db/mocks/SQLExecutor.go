@@ -4,10 +4,11 @@ package mocks
 
 import (
 	context "context"
-	v1 "github.com/mistandok/platform_common/pkg/db"
+
+	db "github.com/mistandok/platform_common/pkg/v1/db"
+	mock "github.com/stretchr/testify/mock"
 
 	pgconn "github.com/jackc/pgx/v5/pgconn"
-	mock "github.com/stretchr/testify/mock"
 
 	pgx "github.com/jackc/pgx/v5"
 )
@@ -85,7 +86,7 @@ func (_c *SQLExecutor_CopyFromContext_Call) RunAndReturn(run func(context.Contex
 }
 
 // ExecContext provides a mock function with given fields: ctx, q, args
-func (_m *SQLExecutor) ExecContext(ctx context.Context, q v1.Query, args ...interface{}) (pgconn.CommandTag, error) {
+func (_m *SQLExecutor) ExecContext(ctx context.Context, q db.Query, args ...interface{}) (pgconn.CommandTag, error) {
 	var _ca []interface{}
 	_ca = append(_ca, ctx, q)
 	_ca = append(_ca, args...)
@@ -97,16 +98,16 @@ func (_m *SQLExecutor) ExecContext(ctx context.Context, q v1.Query, args ...inte
 
 	var r0 pgconn.CommandTag
 	var r1 error
-	if rf, ok := ret.Get(0).(func(context.Context, v1.Query, ...interface{}) (pgconn.CommandTag, error)); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, db.Query, ...interface{}) (pgconn.CommandTag, error)); ok {
 		return rf(ctx, q, args...)
 	}
-	if rf, ok := ret.Get(0).(func(context.Context, v1.Query, ...interface{}) pgconn.CommandTag); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, db.Query, ...interface{}) pgconn.CommandTag); ok {
 		r0 = rf(ctx, q, args...)
 	} else {
 		r0 = ret.Get(0).(pgconn.CommandTag)
 	}
 
-	if rf, ok := ret.Get(1).(func(context.Context, v1.Query, ...interface{}) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, db.Query, ...interface{}) error); ok {
 		r1 = rf(ctx, q, args...)
 	} else {
 		r1 = ret.Error(1)
@@ -122,14 +123,14 @@ type SQLExecutor_ExecContext_Call struct {
 
 // ExecContext is a helper method to define mock.On call
 //   - ctx context.Context
-//   - q v1.Query
+//   - q db.Query
 //   - args ...interface{}
 func (_e *SQLExecutor_Expecter) ExecContext(ctx interface{}, q interface{}, args ...interface{}) *SQLExecutor_ExecContext_Call {
 	return &SQLExecutor_ExecContext_Call{Call: _e.mock.On("ExecContext",
 		append([]interface{}{ctx, q}, args...)...)}
 }
 
-func (_c *SQLExecutor_ExecContext_Call) Run(run func(ctx context.Context, q v1.Query, args ...interface{})) *SQLExecutor_ExecContext_Call {
+func (_c *SQLExecutor_ExecContext_Call) Run(run func(ctx context.Context, q db.Query, args ...interface{})) *SQLExecutor_ExecContext_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		variadicArgs := make([]interface{}, len(args)-2)
 		for i, a := range args[2:] {
@@ -137,7 +138,7 @@ func (_c *SQLExecutor_ExecContext_Call) Run(run func(ctx context.Context, q v1.Q
 				variadicArgs[i] = a.(interface{})
 			}
 		}
-		run(args[0].(context.Context), args[1].(v1.Query), variadicArgs...)
+		run(args[0].(context.Context), args[1].(db.Query), variadicArgs...)
 	})
 	return _c
 }
@@ -147,13 +148,13 @@ func (_c *SQLExecutor_ExecContext_Call) Return(_a0 pgconn.CommandTag, _a1 error)
 	return _c
 }
 
-func (_c *SQLExecutor_ExecContext_Call) RunAndReturn(run func(context.Context, v1.Query, ...interface{}) (pgconn.CommandTag, error)) *SQLExecutor_ExecContext_Call {
+func (_c *SQLExecutor_ExecContext_Call) RunAndReturn(run func(context.Context, db.Query, ...interface{}) (pgconn.CommandTag, error)) *SQLExecutor_ExecContext_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // QueryContext provides a mock function with given fields: ctx, q, args
-func (_m *SQLExecutor) QueryContext(ctx context.Context, q v1.Query, args ...interface{}) (pgx.Rows, error) {
+func (_m *SQLExecutor) QueryContext(ctx context.Context, q db.Query, args ...interface{}) (pgx.Rows, error) {
 	var _ca []interface{}
 	_ca = append(_ca, ctx, q)
 	_ca = append(_ca, args...)
@@ -165,10 +166,10 @@ func (_m *SQLExecutor) QueryContext(ctx context.Context, q v1.Query, args ...int
 
 	var r0 pgx.Rows
 	var r1 error
-	if rf, ok := ret.Get(0).(func(context.Context, v1.Query, ...interface{}) (pgx.Rows, error)); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, db.Query, ...interface{}) (pgx.Rows, error)); ok {
 		return rf(ctx, q, args...)
 	}
-	if rf, ok := ret.Get(0).(func(context.Context, v1.Query, ...interface{}) pgx.Rows); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, db.Query, ...interface{}) pgx.Rows); ok {
 		r0 = rf(ctx, q, args...)
 	} else {
 		if ret.Get(0) != nil {
@@ -176,7 +177,7 @@ func (_m *SQLExecutor) QueryContext(ctx context.Context, q v1.Query, args ...int
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(context.Context, v1.Query, ...interface{}) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, db.Query, ...interface{}) error); ok {
 		r1 = rf(ctx, q, args...)
 	} else {
 		r1 = ret.Error(1)
@@ -192,14 +193,14 @@ type SQLExecutor_QueryContext_Call struct {
 
 // QueryContext is a helper method to define mock.On call
 //   - ctx context.Context
-//   - q v1.Query
+//   - q db.Query
 //   - args ...interface{}
 func (_e *SQLExecutor_Expecter) QueryContext(ctx interface{}, q interface{}, args ...interface{}) *SQLExecutor_QueryContext_Call {
 	return &SQLExecutor_QueryContext_Call{Call: _e.mock.On("QueryContext",
 		append([]interface{}{ctx, q}, args...)...)}
 }
 
-func (_c *SQLExecutor_QueryContext_Call) Run(run func(ctx context.Context, q v1.Query, args ...interface{})) *SQLExecutor_QueryContext_Call {
+func (_c *SQLExecutor_QueryContext_Call) Run(run func(ctx context.Context, q db.Query, args ...interface{})) *SQLExecutor_QueryContext_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		variadicArgs := make([]interface{}, len(args)-2)
 		for i, a := range args[2:] {
@@ -207,7 +208,7 @@ func (_c *SQLExecutor_QueryContext_Call) Run(run func(ctx context.Context, q v1.
 				variadicArgs[i] = a.(interface{})
 			}
 		}
-		run(args[0].(context.Context), args[1].(v1.Query), variadicArgs...)
+		run(args[0].(context.Context), args[1].(db.Query), variadicArgs...)
 	})
 	return _c
 }
@@ -217,13 +218,13 @@ func (_c *SQLExecutor_QueryContext_Call) Return(_a0 pgx.Rows, _a1 error) *SQLExe
 	return _c
 }
 
-func (_c *SQLExecutor_QueryContext_Call) RunAndReturn(run func(context.Context, v1.Query, ...interface{}) (pgx.Rows, error)) *SQLExecutor_QueryContext_Call {
+func (_c *SQLExecutor_QueryContext_Call) RunAndReturn(run func(context.Context, db.Query, ...interface{}) (pgx.Rows, error)) *SQLExecutor_QueryContext_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // QueryRowContext provides a mock function with given fields: ctx, q, args
-func (_m *SQLExecutor) QueryRowContext(ctx context.Context, q v1.Query, args ...interface{}) pgx.Row {
+func (_m *SQLExecutor) QueryRowContext(ctx context.Context, q db.Query, args ...interface{}) pgx.Row {
 	var _ca []interface{}
 	_ca = append(_ca, ctx, q)
 	_ca = append(_ca, args...)
@@ -234,7 +235,7 @@ func (_m *SQLExecutor) QueryRowContext(ctx context.Context, q v1.Query, args ...
 	}
 
 	var r0 pgx.Row
-	if rf, ok := ret.Get(0).(func(context.Context, v1.Query, ...interface{}) pgx.Row); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, db.Query, ...interface{}) pgx.Row); ok {
 		r0 = rf(ctx, q, args...)
 	} else {
 		if ret.Get(0) != nil {
@@ -252,14 +253,14 @@ type SQLExecutor_QueryRowContext_Call struct {
 
 // QueryRowContext is a helper method to define mock.On call
 //   - ctx context.Context
-//   - q v1.Query
+//   - q db.Query
 //   - args ...interface{}
 func (_e *SQLExecutor_Expecter) QueryRowContext(ctx interface{}, q interface{}, args ...interface{}) *SQLExecutor_QueryRowContext_Call {
 	return &SQLExecutor_QueryRowContext_Call{Call: _e.mock.On("QueryRowContext",
 		append([]interface{}{ctx, q}, args...)...)}
 }
 
-func (_c *SQLExecutor_QueryRowContext_Call) Run(run func(ctx context.Context, q v1.Query, args ...interface{})) *SQLExecutor_QueryRowContext_Call {
+func (_c *SQLExecutor_QueryRowContext_Call) Run(run func(ctx context.Context, q db.Query, args ...interface{})) *SQLExecutor_QueryRowContext_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		variadicArgs := make([]interface{}, len(args)-2)
 		for i, a := range args[2:] {
@@ -267,7 +268,7 @@ func (_c *SQLExecutor_QueryRowContext_Call) Run(run func(ctx context.Context, q 
 				variadicArgs[i] = a.(interface{})
 			}
 		}
-		run(args[0].(context.Context), args[1].(v1.Query), variadicArgs...)
+		run(args[0].(context.Context), args[1].(db.Query), variadicArgs...)
 	})
 	return _c
 }
@@ -277,7 +278,7 @@ func (_c *SQLExecutor_QueryRowContext_Call) Return(_a0 pgx.Row) *SQLExecutor_Que
 	return _c
 }
 
-func (_c *SQLExecutor_QueryRowContext_Call) RunAndReturn(run func(context.Context, v1.Query, ...interface{}) pgx.Row) *SQLExecutor_QueryRowContext_Call {
+func (_c *SQLExecutor_QueryRowContext_Call) RunAndReturn(run func(context.Context, db.Query, ...interface{}) pgx.Row) *SQLExecutor_QueryRowContext_Call {
 	_c.Call.Return(run)
 	return _c
 }

@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	v1 "github.com/mistandok/platform_common/pkg/db"
+	db "github.com/mistandok/platform_common/pkg/v1/db"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -66,19 +66,19 @@ func (_c *Client_Close_Call) RunAndReturn(run func() error) *Client_Close_Call {
 }
 
 // DB provides a mock function with given fields:
-func (_m *Client) DB() v1.DB {
+func (_m *Client) DB() db.DB {
 	ret := _m.Called()
 
 	if len(ret) == 0 {
 		panic("no return value specified for DB")
 	}
 
-	var r0 v1.DB
-	if rf, ok := ret.Get(0).(func() v1.DB); ok {
+	var r0 db.DB
+	if rf, ok := ret.Get(0).(func() db.DB); ok {
 		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(v1.DB)
+			r0 = ret.Get(0).(db.DB)
 		}
 	}
 
@@ -102,12 +102,12 @@ func (_c *Client_DB_Call) Run(run func()) *Client_DB_Call {
 	return _c
 }
 
-func (_c *Client_DB_Call) Return(_a0 v1.DB) *Client_DB_Call {
+func (_c *Client_DB_Call) Return(_a0 db.DB) *Client_DB_Call {
 	_c.Call.Return(_a0)
 	return _c
 }
 
-func (_c *Client_DB_Call) RunAndReturn(run func() v1.DB) *Client_DB_Call {
+func (_c *Client_DB_Call) RunAndReturn(run func() db.DB) *Client_DB_Call {
 	_c.Call.Return(run)
 	return _c
 }

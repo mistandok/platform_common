@@ -4,8 +4,8 @@ package mocks
 
 import (
 	context "context"
-	v1 "github.com/mistandok/platform_common/pkg/db"
 
+	db "github.com/mistandok/platform_common/pkg/v1/db"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -23,7 +23,7 @@ func (_m *TxManager) EXPECT() *TxManager_Expecter {
 }
 
 // ReadCommitted provides a mock function with given fields: ctx, f
-func (_m *TxManager) ReadCommitted(ctx context.Context, f v1.Handler) error {
+func (_m *TxManager) ReadCommitted(ctx context.Context, f db.Handler) error {
 	ret := _m.Called(ctx, f)
 
 	if len(ret) == 0 {
@@ -31,7 +31,7 @@ func (_m *TxManager) ReadCommitted(ctx context.Context, f v1.Handler) error {
 	}
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, v1.Handler) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, db.Handler) error); ok {
 		r0 = rf(ctx, f)
 	} else {
 		r0 = ret.Error(0)
@@ -47,14 +47,14 @@ type TxManager_ReadCommitted_Call struct {
 
 // ReadCommitted is a helper method to define mock.On call
 //   - ctx context.Context
-//   - f v1.Handler
+//   - f db.Handler
 func (_e *TxManager_Expecter) ReadCommitted(ctx interface{}, f interface{}) *TxManager_ReadCommitted_Call {
 	return &TxManager_ReadCommitted_Call{Call: _e.mock.On("ReadCommitted", ctx, f)}
 }
 
-func (_c *TxManager_ReadCommitted_Call) Run(run func(ctx context.Context, f v1.Handler)) *TxManager_ReadCommitted_Call {
+func (_c *TxManager_ReadCommitted_Call) Run(run func(ctx context.Context, f db.Handler)) *TxManager_ReadCommitted_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(context.Context), args[1].(v1.Handler))
+		run(args[0].(context.Context), args[1].(db.Handler))
 	})
 	return _c
 }
@@ -64,7 +64,7 @@ func (_c *TxManager_ReadCommitted_Call) Return(_a0 error) *TxManager_ReadCommitt
 	return _c
 }
 
-func (_c *TxManager_ReadCommitted_Call) RunAndReturn(run func(context.Context, v1.Handler) error) *TxManager_ReadCommitted_Call {
+func (_c *TxManager_ReadCommitted_Call) RunAndReturn(run func(context.Context, db.Handler) error) *TxManager_ReadCommitted_Call {
 	_c.Call.Return(run)
 	return _c
 }

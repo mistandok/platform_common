@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/mistandok/platform_common/pkg/db"
+	"github.com/mistandok/platform_common/pkg/v1/db"
 	"github.com/rs/zerolog"
 )
 
