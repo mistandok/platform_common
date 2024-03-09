@@ -4,8 +4,8 @@ package mocks
 
 import (
 	context "context"
+	v1 "github.com/mistandok/platform_common/pkg/db"
 
-	v1 "github.com/mistandok/platform_common/pkg/db/v1"
 	mock "github.com/stretchr/testify/mock"
 )
 

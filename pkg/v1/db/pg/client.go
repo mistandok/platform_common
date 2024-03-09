@@ -3,19 +3,18 @@ package pg
 import (
 	"context"
 	"fmt"
-	"github.com/mistandok/platform_common/pkg/db/v1"
-
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/mistandok/platform_common/pkg/db"
 	"github.com/rs/zerolog"
 )
 
 type pgClient struct {
-	masterDBC v1.DB
+	masterDBC db.DB
 	logger    *zerolog.Logger
 }
 
 // New новый клиент для работы с Postgres
-func New(ctx context.Context, dsn string, logger *zerolog.Logger) (v1.Client, error) {
+func New(ctx context.Context, dsn string, logger *zerolog.Logger) (db.Client, error) {
 	pgxConfig, err := pgxpool.ParseConfig(dsn)
 	if err != nil {
 		return nil, fmt.Errorf("ошибка при формировании конфига для pgxpool: %v", err)
@@ -33,7 +32,7 @@ func New(ctx context.Context, dsn string, logger *zerolog.Logger) (v1.Client, er
 }
 
 // DB доступ к интерфейсу базы данных
-func (c *pgClient) DB() v1.DB {
+func (c *pgClient) DB() db.DB {
 	return c.masterDBC
 }
 

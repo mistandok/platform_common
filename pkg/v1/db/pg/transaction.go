@@ -3,24 +3,23 @@ package pg
 import (
 	"context"
 	"fmt"
-	"github.com/mistandok/platform_common/pkg/db/v1"
-
 	"github.com/jackc/pgx/v5"
+	"github.com/mistandok/platform_common/pkg/db"
 )
 
 type manager struct {
-	db v1.Transactor
+	db db.Transactor
 }
 
 // NewTransactionManager создает новый менеджер транзакций, который удовлетворяет интерфейсу db.TxManager
-func NewTransactionManager(db v1.Transactor) v1.TxManager {
+func NewTransactionManager(db db.Transactor) db.TxManager {
 	return &manager{
 		db: db,
 	}
 }
 
 // transaction основная функция, которая выполняет указанный пользователем обработчик в транзакции
-func (m *manager) transaction(ctx context.Context, opts pgx.TxOptions, fn v1.Handler) (err error) {
+func (m *manager) transaction(ctx context.Context, opts pgx.TxOptions, fn db.Handler) (err error) {
 	// Если это вложенная транзакция, пропускаем инициацию новой транзакции и выполняем обработчик.
 	tx, ok := ContextTx(ctx)
 	if ok {
@@ -71,7 +70,7 @@ func (m *manager) transaction(ctx context.Context, opts pgx.TxOptions, fn v1.Han
 	return err
 }
 
-func (m *manager) ReadCommitted(ctx context.Context, f v1.Handler) error {
+func (m *manager) ReadCommitted(ctx context.Context, f db.Handler) error {
 	txOpts := pgx.TxOptions{IsoLevel: pgx.ReadCommitted}
 	return m.transaction(ctx, txOpts, f)
 }

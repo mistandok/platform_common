@@ -2,12 +2,11 @@ package pg
 
 import (
 	"context"
-	"github.com/mistandok/platform_common/pkg/db/v1"
-	"github.com/mistandok/platform_common/pkg/db/v1/prettier"
-
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/mistandok/platform_common/pkg/db"
+	"github.com/mistandok/platform_common/pkg/db/prettier"
 	"github.com/rs/zerolog"
 )
 
@@ -23,7 +22,7 @@ type pg struct {
 }
 
 // NewDB ..
-func NewDB(dbc *pgxpool.Pool, logger *zerolog.Logger) v1.DB {
+func NewDB(dbc *pgxpool.Pool, logger *zerolog.Logger) db.DB {
 	return &pg{
 		pool:   dbc,
 		logger: logger,
@@ -31,7 +30,7 @@ func NewDB(dbc *pgxpool.Pool, logger *zerolog.Logger) v1.DB {
 }
 
 // ExecContext ..
-func (p *pg) ExecContext(ctx context.Context, q v1.Query, args ...interface{}) (pgconn.CommandTag, error) {
+func (p *pg) ExecContext(ctx context.Context, q db.Query, args ...interface{}) (pgconn.CommandTag, error) {
 	logQuery(ctx, p.logger, q)
 
 	tx, ok := ContextTx(ctx)
@@ -43,7 +42,7 @@ func (p *pg) ExecContext(ctx context.Context, q v1.Query, args ...interface{}) (
 }
 
 // QueryContext ..
-func (p *pg) QueryContext(ctx context.Context, q v1.Query, args ...interface{}) (pgx.Rows, error) {
+func (p *pg) QueryContext(ctx context.Context, q db.Query, args ...interface{}) (pgx.Rows, error) {
 	logQuery(ctx, p.logger, q)
 
 	tx, ok := ContextTx(ctx)
@@ -55,7 +54,7 @@ func (p *pg) QueryContext(ctx context.Context, q v1.Query, args ...interface{}) 
 }
 
 // QueryRowContext ..
-func (p *pg) QueryRowContext(ctx context.Context, q v1.Query, args ...interface{}) pgx.Row {
+func (p *pg) QueryRowContext(ctx context.Context, q db.Query, args ...interface{}) pgx.Row {
 	logQuery(ctx, p.logger, q)
 
 	tx, ok := ContextTx(ctx)
@@ -116,7 +115,7 @@ func ContextTx(ctx context.Context) (pgx.Tx, bool) {
 	return tx, true
 }
 
-func logQuery(_ context.Context, logger *zerolog.Logger, q v1.Query) {
+func logQuery(_ context.Context, logger *zerolog.Logger, q db.Query) {
 	if logLevel := logger.GetLevel(); logLevel == zerolog.DebugLevel {
 		prettyQuery := prettier.Pretty(q.QueryRaw)
 		logger.Debug().Str("sql", q.Name).Str("query", prettyQuery).Msg("лог запроса")
