@@ -3,9 +3,10 @@ module github.com/mistandok/platform_common
 go 1.21.3
 
 require (
+	github.com/gomodule/redigo v1.9.2
 	github.com/jackc/pgx/v5 v5.5.4
 	github.com/rs/zerolog v1.32.0
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.4
 )
 
 require (
