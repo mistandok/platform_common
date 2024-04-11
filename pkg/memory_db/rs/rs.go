@@ -31,7 +31,7 @@ func (r *rs) DoContext(ctx context.Context, commandName string, args ...interfac
 		_ = conn.Close()
 	}()
 
-	reply, err = redis.String(conn.Do(commandName, args...))
+	reply, err = conn.Do(commandName, args...)
 	if err != nil {
 		return nil, fmt.Errorf("ошибка при попытке выполнения команды в Redis: %w", err)
 	}
